@@ -35,10 +35,23 @@ export interface LenderProp {
 
 const LendersMap = () => {
     const [lenders, setLenders] = useState<LenderProp[]>([]);
+    const [currentPosition, setCurrentPosition] = useState({latitude: 0, longitude: 0});
     
     useEffect(() => {
         api.get('lenders').then(res => setLenders(res.data));
     }, []);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            setCurrentPosition({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+        }, (error) => {
+            console.error("There was an error fetching the current location: ", error)
+        });
+
+    }, [])
 
     return (
         <Content>
@@ -57,7 +70,7 @@ const LendersMap = () => {
             </Aside>
 
             <Map
-                center={[-27.4415226, -48.4111996]}
+                center={[currentPosition.latitude, currentPosition.longitude]}
                 zoom={15}
                 style={{width: '100%', height: '100%'}}
             >
