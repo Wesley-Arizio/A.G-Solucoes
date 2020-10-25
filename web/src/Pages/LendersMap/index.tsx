@@ -51,7 +51,7 @@ const LendersMap = () => {
             console.error("There was an error fetching the current location: ", error)
         });
 
-    }, [])
+    }, [currentPosition.latitude, currentPosition.longitude])
 
     return (
         <Content>
