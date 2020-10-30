@@ -56,13 +56,4 @@ export class createLenders1602910039420 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable('lenders');
     }
-
 }
-
-
-// nome do agiota
-// preço minimo
-// preço máximo
-// consequencias de nao pagamento ou atraso (descrição);
-// contato (zap zap, email)
-// foto de perfil ou alguma logo aleatoria

@@ -42,9 +42,7 @@ export default {
         });
 
         await schema.validate(lender, {abortEarly: false});
-
-        console.log(lender);
-
+        
         const createLender = lenderRepository.create(lender);
 
         await lenderRepository.save(createLender);
