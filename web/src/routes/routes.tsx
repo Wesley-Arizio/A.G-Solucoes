@@ -1,4 +1,4 @@
-import React, { useEffect }from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { useAuthContext } from '../Context/context';
@@ -8,6 +8,7 @@ import Login from '../Pages/Login/index';
 import LendersMap from '../Pages/LendersMap/index';
 import CreateLender from '../Pages/CreateLender/index';
 import ProfileLender from '../Pages/LenderProfile/index';
+import CreateUserAccount from '../Pages/CreateUserAccount/index';
 
 const Routes = () => {
     const { authenticated, loading } = useAuthContext();
@@ -28,7 +29,8 @@ const Routes = () => {
     return (
             <Switch>
                 <CustomRoute exact path="/" component={Home} />
-                <CustomRoute  path="/auth" component={Login}/>
+                <CustomRoute path="/auth" component={Login}/>
+                <CustomRoute path="/user/create-account" component={CreateUserAccount}/>
 
                 {/* Private */}
                 <CustomRoute isPrivate path="/app" component={LendersMap} />
