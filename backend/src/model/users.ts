@@ -23,7 +23,7 @@ export default class User {
         this.password = bcrypt.hashSync(this.password, 10);
     }
 
-    @OneToOne(type => User, lender => Lender)
-    @JoinColumn()
-    lender: Lender
+    // @OneToOne(type => User, lender => Lender)
+    // @JoinColumn()
+    // lender: Lender
 }

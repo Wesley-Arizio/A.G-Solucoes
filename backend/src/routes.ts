@@ -8,17 +8,17 @@ import auth from './middleware/auth';
 
 const routes  = Router();
 
+routes.post('/user', UserController.createAccount);
+
+routes.post('/user/auth', AuthController.authenticate);
+
+routes.use(auth);
+
 routes.post('/lenders', LendersController.create);
 
 routes.get('/lenders', LendersController.index);
 
 routes.get('/lender/:id', LendersController.show);
-
-routes.post('/user', UserController.createAccount);
-
-routes.get('/user/auth', AuthController.authenticate);
-
-routes.use(auth);
 
 
 export default routes;

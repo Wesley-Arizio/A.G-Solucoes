@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import User from '../model/users';
 import { getRepository } from 'typeorm';
 import * as Yup from 'yup';
+import Lender from '../model/lenders';
 
 export default {
     async createAccount(request: Request, response: Response) {
@@ -29,7 +30,7 @@ export default {
         const userExists = await userRepository
             .createQueryBuilder('user')
             .where("user.email = :email", { email: email })
-            .getOne();
+            .getOne()
 
         if(userExists){
             return response.status(401).send({
@@ -41,6 +42,7 @@ export default {
         user.name = name;
         user.email = email;
         user.password = password;
+    
 
         await userRepository.save(user);
 
