@@ -5,6 +5,7 @@ import history from '../history';
 import api from '../services/api';
 
 export interface User {
+    name: string,
     email: string,
     password: string
 }
@@ -58,8 +59,9 @@ export function AuthContextProvider({ children }: any){
     const [state, dispatch] = useReducer(handleReducer, {
         authenticated: false,
         user: {
-           email: "",
-           password:"" 
+            name: "",
+            email: "",
+            password:"" 
         },
         loading: true
     });
