@@ -50,7 +50,7 @@ const Home = () => {
                         </Link>
                         <span>
                             Não tem conta?
-                                <Link to="/login" className="register">Cadastre-se aqui</Link>
+                                <Link to="/user/create-account" className="register">Cadastre-se aqui</Link>
                         </span>
                     </ContainerAuth>
                     <Link to="/app" className="enter-app">
