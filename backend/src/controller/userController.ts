@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-
-import User from '../model/users';
+import jwt from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
 import * as Yup from 'yup';
+
+import User from '../model/users';
 import Lender from '../model/lenders';
 
 export default {
@@ -46,6 +47,16 @@ export default {
 
         await userRepository.save(user);
 
-        return response.status(201).send({ user });
+        const token = jwt.sign({ id: user.id }, `${process.env.TOKEN_SECRET_KEY}`, {expiresIn: '1d'});
+
+        const userToReturn = {
+            ...user,
+            password: undefined
+        }
+
+        return response.status(201).send({ 
+            token,
+            userToReturn
+        });
     }
 }
