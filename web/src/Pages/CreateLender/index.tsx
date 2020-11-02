@@ -1,5 +1,5 @@
 import React, {useState, FormEvent} from 'react';
-import { useHistory } from 'react-router-dom';
+import history from '../../history';
 
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import leaflet, { LeafletMouseEvent } from 'leaflet';
@@ -33,7 +33,6 @@ interface LenderProp {
 }
 
 const CreateLender = () => {
-    const history = useHistory();
     const [position, setPosition] = useState({latitude: 0, longitude: 0});
 
     const [name, setName] = useState('');

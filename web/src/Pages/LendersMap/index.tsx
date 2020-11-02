@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useDispatchContext} from '../../Context/context';
 
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -34,6 +35,7 @@ export interface LenderProp {
 }
 
 const LendersMap = () => {
+    const dispatch = useDispatchContext();
     const [lenders, setLenders] = useState<LenderProp[]>([]);
     const [currentPosition, setCurrentPosition] = useState({latitude: 0, longitude: 0});
     
@@ -41,17 +43,12 @@ const LendersMap = () => {
         api.get('lenders').then(res => setLenders(res.data));
     }, []);
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(position => {
-            setCurrentPosition({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            });
-        }, (error) => {
-            console.error("There was an error fetching the current location: ", error)
-        });
-
-    }, [currentPosition.latitude, currentPosition.longitude])
+    useEffect( () => {
+        navigator.geolocation.getCurrentPosition( position => {
+            const { latitude, longitude } = position.coords;
+            setCurrentPosition({latitude, longitude});
+        })
+    }, [currentPosition.latitude, currentPosition.longitude]);
 
     return (
         <Content>
@@ -62,7 +59,7 @@ const LendersMap = () => {
                     <h2>Escolha um agiota no mapa</h2>
                     <p>Pegue seu empréstimo agora memso!</p>
                 </header>
-
+                <button onClick={ () => dispatch({type: 'logout'}) }>Sair</button>
                 <footer>
                     <strong>Florianopolis</strong>
                     <span>Santa Catarina</span>

@@ -1,22 +1,40 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useEffect }from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import { useAuthContext } from '../Context/context';
 
 import Home from '../Pages/Home/index';
+import Login from '../Pages/Login/index';
 import LendersMap from '../Pages/LendersMap/index';
 import CreateLender from '../Pages/CreateLender/index';
 import ProfileLender from '../Pages/LenderProfile/index';
 
 const Routes = () => {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route  path="/app" component={LendersMap} />
+    const { authenticated, loading } = useAuthContext();
+    
+    function CustomRoute({isPrivate, ...rest}: any){
 
-                <Route  path="/lender/create" component={CreateLender} />
-                <Route  path="/profile/:id" component={ProfileLender} />
+        if(loading) {
+            return <h1>Loading...</h1>
+        }
+
+        if(isPrivate && !authenticated ){
+            return <Redirect to="/auth"/>
+        }
+
+        return <Route {...rest} />
+    }
+
+    return (
+            <Switch>
+                <CustomRoute exact path="/" component={Home} />
+                <CustomRoute  path="/auth" component={Login}/>
+
+                {/* Private */}
+                <CustomRoute isPrivate path="/app" component={LendersMap} />
+                <CustomRoute isPrivate path="/lender/create" component={CreateLender} />
+                <CustomRoute isPrivate path="/profile/:id" component={ProfileLender} />
             </Switch>
-        </BrowserRouter>
     )
 }
 

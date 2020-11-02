@@ -3,7 +3,17 @@ import { FiArrowRight } from 'react-icons/fi'
 
 import { Link } from 'react-router-dom';
 
-import { Content, Container, Main, ContainerText, ContainerImage, Location, Header, ContainerLink } from './styles';
+import { 
+    Content,
+    Container,
+    Main, 
+    ContainerText, 
+    ContainerImage, 
+    Location, 
+    Header, 
+    ContainerLink,
+    ContainerAuth
+} from './styles';
 
 import logoImg from '../../assets/logo_white.svg';
 import landing from '../../assets/landing.svg';
@@ -34,8 +44,17 @@ const Home = () => {
                     </ContainerImage>
                 </Main>
                 <ContainerLink>
+                    <ContainerAuth>
+                        <Link to="/auth" className="button-login">
+                            Login
+                        </Link>
+                        <span>
+                            Não tem conta?
+                                <Link to="/login" className="register">Cadastre-se aqui</Link>
+                        </span>
+                    </ContainerAuth>
                     <Link to="/app" className="enter-app">
-                        <FiArrowRight size={26} color="#303030" />
+                        <FiArrowRight size={26} color="#303030" className="arrow"/>
                     </Link>
                 </ContainerLink>
             </Container>

@@ -35,8 +35,13 @@ export default {
 
         const token = jwt.sign({ id: user.id }, `${process.env.TOKEN_SECRET_KEY}`, {expiresIn: '1d'});
 
+        const userToReturn = {
+            ...user,
+            password: undefined,
+        }
+
         return response.json({
-            user,
+            userToReturn,
             token,
         });
     }
