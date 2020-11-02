@@ -29,6 +29,9 @@ export const ContainerImage = styled.div`
     width: 65%;
     height: 100vh;
 
+    position: absolute;
+    left: 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,6 +46,9 @@ export const ContainerImage = styled.div`
 export const ContainerFormLogin = styled.div`
     width: 35%;
     height: 100vh;
+
+    position: absolute;
+    right: 0;
 
     background: #424242;
 
@@ -90,8 +96,11 @@ export const ContainerFormLogin = styled.div`
 
 export const Form = styled.form`
     width: 100%;
+    max-width: 1000px;
     height: auto;
     max-height: 80vh;
+
+    margin: 0 auto;
 
     padding: 20px;
 `;
@@ -170,7 +179,7 @@ export const ContainerSupport = styled.ul`
     li a{
         
         font-family: 'Nunito';
-        font-size: 16px;
+        font-size: 18px;
         font-style: normal;
         font-weight: 600;
         line-height: 22px;
@@ -181,5 +190,19 @@ export const ContainerSupport = styled.ul`
 
     li span {
         margin-left: 10px;
+    }
+
+    @media(max-width: 768px){
+        width: 100%; 
+        flex-direction: column;
+        text-align: left;
+
+        li {
+            width: 100%;
+        }
+
+        li + li {
+            margin-top: 5px;
+        }
     }
 `

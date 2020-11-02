@@ -38,7 +38,7 @@ const Login = () => {
   const dispatch = useDispatchContext();
 
   const state = useAuthContext();
-  const [user, setUser] = useState<User>({email: '', password: ''})
+  const [user, setUser] = useState<User>({name: '', email: '', password: ''})
   
   useEffect(() => {
     state.user.email = user.email;
